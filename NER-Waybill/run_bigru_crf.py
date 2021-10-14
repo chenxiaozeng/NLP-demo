@@ -30,6 +30,8 @@ train_ds, dev_ds, test_ds = load_dataset(datafiles=(
         './express_ner/train.txt', './express_ner/dev.txt', './express_ner/test.txt'))
 # train_ds, dev_ds, test_ds = load_dataset(datafiles=('express_ner/train.txt', 'express_ner/dev.txt', 'express_ner/test.txt'))
 
+print(111)
+
 label_vocab = load_dict('./conf/tag.dic')
 word_vocab = load_dict('./conf/word.dic')
 

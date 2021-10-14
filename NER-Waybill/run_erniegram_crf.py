@@ -18,7 +18,7 @@ from functools import partial
 
 import paddle
 from paddlenlp.data import Stack, Tuple, Pad
-from paddlenlp.transformers import ErnieTokenizer, ErnieForTokenClassification
+from paddlenlp.transformers import ErnieGramTokenizer, ErnieGramForTokenClassification
 from paddlenlp.metrics import ChunkEvaluator
 
 from model import ErnieCrfForTokenClassification
@@ -73,7 +73,7 @@ if __name__ == '__main__':
         './express_ner/train.txt', './express_ner/dev.txt', './express_ner/test.txt'))
 
     label_vocab = load_dict('./conf/tag.dic')
-    tokenizer = ErnieTokenizer.from_pretrained('ernie-1.0')
+    tokenizer = ErnieGramTokenizer.from_pretrained('ernie-gram-zh')
 
     trans_func = partial(
         convert_to_features, tokenizer=tokenizer, label_vocab=label_vocab)
@@ -106,8 +106,8 @@ if __name__ == '__main__':
         collate_fn=batchify_fn)
 
     # Define the model netword and its loss
-    ernie = ErnieForTokenClassification.from_pretrained(
-        "ernie-1.0", num_classes=len(label_vocab))
+    ernie = ErnieGramForTokenClassification.from_pretrained(
+        "ernie-gram-zh", num_classes=len(label_vocab))
     model = ErnieCrfForTokenClassification(ernie)
 
     metric = ChunkEvaluator(label_list=label_vocab.keys(), suffix=True)

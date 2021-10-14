@@ -8,7 +8,7 @@ from paddlenlp.data import Stack, Tuple, Pad
 from paddlenlp.layers import LinearChainCrf, ViterbiDecoder, LinearChainCrfLoss
 from paddlenlp.metrics import ChunkEvaluator
 from utils import load_dict, evaluate, predict, parse_decodes1, parse_decodes2
-from paddlenlp.transformers import ErnieGramTokenizer, ErnieGramForTokenClassification
+from paddlenlp.transformers import ErnieTokenizer, ErnieForTokenClassification, ErnieGramTokenizer, ErnieGramForTokenClassification
 from utils import convert_example
 
 def load_dataset(datafiles):
