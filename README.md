@@ -28,7 +28,7 @@
 
 <img src="images/entity.png" width = "330" height = "158"  align=center />
 
-<center>图1：实体示例</center></br>
+<div align="center">图1：实体示例</div>  
 
 * **实体词往往稀疏低频**    
 人名在语料出现频次高，但不同人名出现频次有限。大多垂类实体词在通用语料出现频次低。
@@ -80,35 +80,37 @@ PaddlePaddle 安装可参考[安装文档](https://www.paddlepaddle.org.cn/insta
 
 <img src="images/tag1.png" style="zoom:80%;" />
 
-<center>图2：快递单实体类型 </center></br>
+<div align="center">图2：快递单实体类型</div>  
 
 针对需要被抽取的“姓名、电话、省、市、区、详细地址”等实体，我们采用BIO标注体系，标签集合可以定义为：label = {P-B, P-I, T-B, T-I, A1-B, A1-I, A2-B, A2-I, A3-B, A3-I, A4-B, A4-I, O}。每个标签的定义分别为：
 
 <img src="images/tag2.png" style="zoom:85%;" />
 
-<center>图3：标签体系 </center></br>
+<div align="center">图3：标签体系</div>  
 
 采用以上标注体系，对于句子“张三18625584663广东省深圳市南山区百度国际大厦”，每个汉字及对应标签如下，其中“张“，”三”在这里表示成了“P-B” 和 “P-I”，“P-B”和“P-I”合并成“P” 这个标签。这样重新组合后可以得到最终的信息抽取结果：
 
 <img src="images/dataset1.png" style="zoom:67%;" />
 
-<center>图4：数据集标注示例 </center></br>
+<div align="center">图4：数据集标注示例</div>  
 
 ### 3.2 模型选择
 
 #### 3.2.1 循环神经网络 - 门控循环单元（GRU，Gate Recurrent Unit）
 
-BIGRU是一种经典的循环神经网络（RNN，Recurrent Neural Network），用于对句子等序列信息进行建模。这里我们重点解释下其概念和相关原理。一个 RNN 的示意图如下所示，
+循环神经网络（RNN，Recurrent Neural Network）能够对序列信息建模，一个 RNN 的示意图如下所示，
 
 <img src="images/rnn1.png" alt="img" style="zoom:60%;" />
 
-<center>图5：RNN示意图 </center></br>
+<div align="center">图5：RNN示意图</div>  
 
 左边是原始的 RNN，可以看到绿色的点代码输入 x，红色的点代表输出 y，中间的蓝色是 RNN 模型部分。橙色的箭头由自身指向自身，表示 RNN 的输入来自于上时刻的输出，这也是为什么名字中带有循环（Recurrent）这个词。
 
 右边是按照时间序列展开的示意图，注意到蓝色的 RNN 模块是同一个，只不过在不同的时刻复用了。这时候能够清晰地表示序列标注模型的输入输出。
 
-GRU是为了解决长期记忆和反向传播中梯度问题而提出来的，和LSTM一样能够有效对长序列建模，且GRU训练效率更高。
+长短时记忆（Long Short-Term Memory, LSTM）是RNN中最经典的模型，通过引入三个门控函数有效解决了长序列训练过程中的梯度消失和梯度爆炸问题。相比普通的RNN，LSTM能够在更长的序列中有更好的表现。GRU可以理解为LSTM网络的简化版，保留了两个门控函数，同样能够解决长期记忆和反向传播中的梯度问题，且更易于计算。
+
+这里我们采用双向网络 - BiGRU，每一个时刻的输出，由前后两个时刻的GRU输出共同决定，这样能够有效考虑到自然语言中的前后语境。
 
 #### 3.2.2 条件随机场（CRF，Conditional Random Fields)
 
@@ -118,7 +120,7 @@ GRU是为了解决长期记忆和反向传播中梯度问题而提出来的，�
 
 <img src="images/crf.png" alt="img" style="zoom:50%;" />
 
-<center>图6：CRF示意图 </center></br>
+<div align="center">图6：CRF示意图</div>  
 
 CRF 本质是一个无向图，其中绿色点表示输入，红色点表示输出。点与点之间的边可以分成两类，一类是 x 与 y 之间的连线，表示其相关性；另一类是相邻时刻的 y之间的相关性。也就是说，在预测某时刻 y 时，同时要考虑相邻的标签。当 CRF 模型收敛时，就会学到类似 P-B 和 T-I 作为相邻标签的概率非常低。
 
@@ -130,7 +132,7 @@ CRF 本质是一个无向图，其中绿色点表示输入，红色点表示输�
 
 ![img](images/ernie2.png)
 
-<center>图7：ERNIE示意图 </center></br>
+<div align="center">图7：ERNIE示意图</div>  
 
 ### 3.3 评估指标
 
