@@ -26,7 +26,7 @@
 不少实体词与普通用语相同，尤其作品名。     
 此外，实体类别多，任务复杂度较高，如下所示实体示例：
 
-<img src="images/entity.png" width = "330" height = "158"  align=center />
+<div align="center"><img src="images/entity.png" width = "330" height = "158"  align=center /></div>  
 
 <div align="center">图1：实体示例</div>  
 
@@ -214,4 +214,12 @@ python run_erniegram_crf.py
 ## 6  模型部署
 
 在模型训练过程中保存的模型文件包含前向预测和反向传播的过程，在实际的工业部署则不需要反向传播，因此需要将模型导成部署需要的模型格式。我们推荐在动态图模式下开发，训练完成后再导出静态图模型，进行部署， 可参考[PaddleNLP模型导出](https://github.com/PaddlePaddle/PaddleNLP/blob/develop/examples/information_extraction/waybill_ie/export_model.py)示例。
+
+获得静态图模型之后，我们使用Paddle Inference进行预测部署。Paddle Inference是飞桨的原生推理库，作用于服务器端和云端，提供高性能的推理能力。
+
+![](images/infer.png)
+
+<div align="center">图8：使用推理库进行预测</div>  
+
+Paddle Inference 采用 Predictor 进行预测。Predictor 是一个高性能预测引擎，该引擎通过对计算图的分析，完成对计算图的一系列的优化（如OP的融合、内存/显存的优化、 MKLDNN，TensorRT 等底层加速库的支持等），能够大大提升预测性能。另外Paddle Inference提供了Python、C++、GO等多语言的API，可以根据实际环境需要进行选择，例如使用 Paddle Inference 开发 Python 预测程序可参考[示例](https://github.com/PaddlePaddle/PaddleNLP/blob/develop/examples/information_extraction/waybill_ie/deploy/python/predict.py)，相关API已安装在Paddle包，直接使用即可。
 
