@@ -118,7 +118,9 @@ PaddlePaddle 安装可参考[安装文档](https://www.paddlepaddle.org.cn/insta
 
 条件随机场属于概率图模型中的无向图模型，这里我们不做展开，只直观解释下该模型背后考量的思想。一个经典的链式 CRF 如下图所示，
 
-<div align="center"><img src="images/crf.png" alt="img" style="zoom:50%;" /></div>
+<div align="center">
+  <img src="images/crf.png" width="350" height="200" />
+</div>  
 
 <div align="center">图6：CRF示意图</div>  
 
@@ -217,7 +219,7 @@ python run_erniegram_crf.py
 
 获得静态图模型之后，我们使用Paddle Inference进行预测部署。Paddle Inference是飞桨的原生推理库，作用于服务器端和云端，提供高性能的推理能力。
 
-![](images/infer.png)
+<img src="images/infer.png" style="zoom:80%;" />
 
 <div align="center">图8：使用推理库进行预测</div>  
 
