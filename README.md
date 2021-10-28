@@ -100,7 +100,9 @@ PaddlePaddle 安装可参考[安装文档](https://www.paddlepaddle.org.cn/insta
 
 循环神经网络（RNN，Recurrent Neural Network）能够对序列信息建模，一个 RNN 的示意图如下所示，
 
-<div align="center"><img src="images/rnn1.png" alt="img" style="zoom:60%;" /></div>  
+<div align="center">
+  <img src="images/rnn1.png" width="80%" height="20%" />
+</div>  
 
 <div align="center">图5：RNN示意图</div>  
 
