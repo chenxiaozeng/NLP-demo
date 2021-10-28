@@ -90,7 +90,9 @@ PaddlePaddle 安装可参考[安装文档](https://www.paddlepaddle.org.cn/insta
 
 采用以上标注体系，对于句子“张三18625584663广东省深圳市南山区百度国际大厦”，每个汉字及对应标签如下，其中“张“，”三”在这里表示成了“P-B” 和 “P-I”，“P-B”和“P-I”合并成“P” 这个标签。这样重新组合后可以得到最终的信息抽取结果：
 
-<div align="center"><img src="images/dataset1.png" style="zoom:67%;" /></div>  
+<div align="center">
+  <img src="images/dataset1.png" width="600" height="320" />
+</div>  
 
 <div align="center">图4：数据集标注示例</div>  
 
@@ -101,7 +103,7 @@ PaddlePaddle 安装可参考[安装文档](https://www.paddlepaddle.org.cn/insta
 循环神经网络（RNN，Recurrent Neural Network）能够对序列信息建模，一个 RNN 的示意图如下所示，
 
 <div align="center">
-  <img src="images/rnn1.png" width="80%" height="20%" />
+  <img src="images/rnn1.png" width="600" height="200" />
 </div>  
 
 <div align="center">图5：RNN示意图</div>  
@@ -132,9 +134,13 @@ CRF 本质是一个无向图，其中绿色点表示输入，红色点表示输�
 
 除了GRU+CRF方案外，我们也可以使用预训练模型，将序列信息抽取问题，建模成字符级分类问题。这里我们采用强大的语义模型ERNIE，完成字符级分类任务。使用预训练模型往往比RNN网络能获得更高的模型精度，但从部署上看，预训练模型参数较多，预测性能可能不符合线上快速相应需求，可以结合模型压缩、FasterTransformer加速等方式进行高性能部署。
 
-![img](images/ernie1.png)
+<div align="center">
+  <img src="images/ernie1.png" width="800" height="200" />
+</div>  
 
-![img](images/ernie2.png)
+<div align="center">
+  <img src="images/ernie2.png" width="800" height="250" />
+</div>  
 
 <div align="center">图7：ERNIE示意图</div>  
 
@@ -143,7 +149,9 @@ CRF 本质是一个无向图，其中绿色点表示输入，红色点表示输�
 信息抽取的通用评测指标：Precision、Recall、F1值。
 例如：希望抽取10个信息，实际抽取12个，其中有9个是对的：
 
-<img src="images/metric.png" style="zoom:80%;" />
+<div align="center">
+  <img src="images/metric.png" width="720" height="250" />
+</div>  
 
 
 
